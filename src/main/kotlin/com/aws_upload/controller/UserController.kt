@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController
 class UserController(private val userService: UserService) {
 
     @GetMapping("/{email}")
-    fun getUser(@PathVariable email: String): String? { // 반환 타입 User?로 변경
+    fun getUser(@PathVariable email: String): String? {
         return userService.getUserByEmail(email)
     }
 }
