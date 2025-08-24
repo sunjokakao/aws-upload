@@ -1,0 +1,25 @@
+# MCP 서버를 시스템 서비스로 등록하는 방법
+# /etc/systemd/system/mcp-server.service 파일로 저장
+
+[Unit]
+Description=MCP Slack Bot Server
+After=network.target
+
+[Service]
+Type=simple
+User=ec2-user
+WorkingDirectory=/home/service/mcp-server
+Environment="PATH=/home/service/mcp-server/venv/bin:/usr/local/bin:/usr/bin:/bin"
+ExecStart=/home/service/mcp-server/venv/bin/python /home/service/mcp-server/app.py
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
+
+# 설치 명령어:
+# sudo cp systemd-service.txt /etc/systemd/system/mcp-server.service
+# sudo systemctl daemon-reload
+# sudo systemctl enable mcp-server
+# sudo systemctl start mcp-server
+# sudo systemctl status mcp-server
